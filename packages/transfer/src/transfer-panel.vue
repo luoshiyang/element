@@ -1,6 +1,5 @@
 <template>
   <div class="el-transfer-panel">
-    {{data}}
     <p class="el-transfer-panel__header">
       <el-checkbox
         v-model="allChecked"

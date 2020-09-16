@@ -1,5 +1,6 @@
 <template>
   <div class="el-transfer-panel">
+    {{data}}
     <p class="el-transfer-panel__header">
       <el-checkbox
         v-model="allChecked"
@@ -133,16 +134,20 @@
         }
       },
 
-      data() {
-        const checked = [];
-        const filteredDataKeys = this.filteredData.map(item => item[this.keyProp]);
-        this.checked.forEach(item => {
-          if (filteredDataKeys.indexOf(item) > -1) {
-            checked.push(item);
-          }
-        });
-        this.checkChangeByUser = false;
-        this.checked = checked;
+      data: {
+        handler() {
+          const checked = [];
+          const filteredDataKeys = this.filteredData.map(item => item[this.keyProp]);
+          this.checked.forEach(item => {
+            if (filteredDataKeys.indexOf(item) > -1) {
+              checked.push(item);
+            }
+          });
+          this.checkChangeByUser = false;
+          // this.checked = checked;
+          this.checked = [];
+        },
+        deep: true
       },
 
       checkableData() {

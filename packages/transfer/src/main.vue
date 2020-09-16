@@ -121,6 +121,11 @@
       targetOrder: {
         type: String,
         default: 'original'
+      },
+      // dynamic
+      sourceOrder: {
+        type: String,
+        default: 'remain'
       }
     },
 
@@ -138,7 +143,16 @@
       },
   
       sourceData() {
-        return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
+        if (this.sourceOrder === 'sourceOrder') {
+          return this.data.filter(item => this.value.indexOf(item[this.props.key]) === -1);
+        } else {
+          return this.data.map(item => {
+            return {
+              ...item,
+              disabled: this.value.indexOf(item[this.props.key]) !== -1
+            };
+          });
+        }
       },
 
       targetData() {
